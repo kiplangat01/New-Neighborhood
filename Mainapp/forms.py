@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from .models import Hood, Profile
+from .models import NeighbourHood, Profile
 
 
 
@@ -17,13 +17,13 @@ class RegisterForm(UserCreationForm):
        fields = ['email', 'username', 'password1', 'password2']
 
 
-class CreateNeigbourhoodForm(ModelForm):
+class CreateNeighbourhoodForm(ModelForm):
     name = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'name'}))
     location =forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4','placeholder': 'location'}))
     img = forms.FileField(max_length=200,label='',widget=forms.FileInput(attrs={'class': 'form-control mb-4', 'placeholder': 'hood image'}))
     
     class Meta():
-        model = Hood
+        model = NeighbourHood
         fields = ['name', 'location', 'img']
 
 class ProfileUpdateForm(ModelForm):
