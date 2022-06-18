@@ -1,41 +1,31 @@
 
 <nav class="navbar navbar-expand-lg bg-dark">
-    <a class="navbar-brand text-light font-weight-bold" style="font-family: 'Merienda'; font-size: 40px;" href="{% url 'home' %}">rates</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link text-light" href="{% url 'home' %}"><b>Home</b> <span class="sr-only">(current)</span></a>
+  <a class="navbar-brand text-light font-weight-bold" style="font-family: 'Merienda'; font-size: 40px;" href="{% url 'home' %}">neigbourhood</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-light" href="{% url 'home' %}"><b>Home</b> <span class="sr-only">(current)</span></a>
+      </li>
+
+    
+      {%if request.user.is_authenticated%}
+        <a class="nav-link text-light" href="{% url 'profile' %}">Profile</a>
+        <a class="nav-link text-light" href="{% url 'logout' %}">logout</a>
+        <a class="nav-link text-light" href=" url 'neigbourhood' "></a>
+
+        {% else %}
+      <li class="nav-item">
+          <a class="nav-link text-light text-center font-weight-bold" href="{% url 'login' %}">login</a>
         </li>
-  
-      
-          {% if user.is_authenticated %}
-          <a class="nav-link text-light" href="{% url 'profile' %}">Profile</a>
-          <a class="nav-link text-light" href="{% url 'logout' %}">logout</a>
-  
-          {% else %}
         <li class="nav-item">
-            <a class="nav-link text-light text-center font-weight-bold" href="{% url 'login' %}">login</a>
-          </li>
-          <li class="nav-item">
-            <a style="border-radius: 15px; margin-left: 30px;" class="text-right nav-link text-light font-weight-bold"  href="{% url 'register' %}">sign up</a>
-          </li>
-          {% endif %}
-      </ul>
-      <div class="input-group">
-        <div class="form-outline">
-          <form style="display: inline-flex;" class="form mr-sm-2" method="get" action="{% url 'search' %}" role="search">
-            {% csrf_token %}
-            <input class="form-control text-center m-3" style="height: fit-content;" type="search" placeholder="Search for a project" name="title" aria-label="Search">
-            <button class="form-button text-center btn btn-info btn-md" style="height: fit-content; margin-top: 15px;" type="submit" style="margin-top: 1%; margin-bottom: 2%;"> Search</button>
-          </form>
-        </div>
-       
-       
-      </div>
-    </div>
-  </nav>
-  
+          <a style="border-radius: 15px; margin-left: 30px;" class="text-right nav-link text-light font-weight-bold"  href="{% url 'register' %}">sign up</a>
+        </li>
+        {% endif %}
+    </ul>
+    
+  </div>
+</nav>

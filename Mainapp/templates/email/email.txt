@@ -1,0 +1,3 @@
+Hello {{username}}
+
+Welcome to neigbourhood community we value and cherish your status
