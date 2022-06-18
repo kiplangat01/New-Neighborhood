@@ -29,7 +29,7 @@ def login_user(request):
         else:
             messages.error(request, 'incorect username or password')
     context = {'page': page}
-    return render(request, 'mainapp/auth.html', context)
+    return render(request, 'mainapp/user.html', context)
 
 def logout_user(request):
     logout(request)
