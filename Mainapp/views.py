@@ -1,4 +1,4 @@
-import profile
+from multiprocessing import context
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -77,40 +77,40 @@ def neighborhoods(request):
     context = {'neigbourhoods': neigbourhoods, 'member': member}
     return render(request, 'mainapp/neigbourhood.html', context)
 
-def single_hood(request, name):
-    newneigbour = NeighbourHood.objects.get(name = name)
-    updates = Updates.objects.filter(hood = newneigbour)
+def self_neigbourhood(request, name):
+    newnmember = NeighbourHood.objects.get(name = name)
+    updates = Updates.objects.filter(neighborhood = newnmember)
     current_user = Profile.objects.get(owner = request.user)
 
     if request.method == 'POST':
         display = Profile.objects.get(owner = request.user)
         title = request.POST.get('title')
         body = request.POST.get('body')
-        new_updates = Updates.objects.create(title = title, body =body, display = display, newneigbour =newneigbour)
+        new_updates = Updates.objects.create(title = title, body =body, display = display, newnmember =newnmember)
         new_updates.save()
 
-    ctx = {'newneigbour': newneigbour, 'current_user': current_user, 'updates':updates}
-    return render(request, 'mainapp/self.html', ctx)
+    context = {'newnmember': newnmember, 'current_user': current_user, 'updates':updates}
+    return render(request, 'mainapp/self.html', context)
 
 @login_required(login_url='login')
-def join_neighborhood(request, name):
+def new_neighborhood(request, name):
     page = 'join'
-    hood = get_object_or_404(NeighbourHood, name=name)
+    neighborhood = get_object_or_404(NeighbourHood, name=name)
     if request.method == 'POST':
         user = Profile.objects.get(owner =request.user)
-        user.hood = hood
+        user.hood = neighborhood
         user.save()
         messages.success(request, 'You have successfully joined')
-        return redirect('hood', hood.name)
-    ctx = {'page':page, 'obj': hood}
-    return render(request, 'hoodapp/join.html', ctx)
+        return redirect('hood', neighborhood.name)
+    context = {'page':page, 'obj': neighborhood}
+    return render(request, 'mainapp/new.html', context)
 
 @login_required(login_url='login')
 def leave_neighborhood(request, name):
-    hood = get_object_or_404(NeighbourHood, id=id)
+    neighborhood = get_object_or_404(NeighbourHood, id=id)
     request.user.profile.hood = None
     request.user.profile.save()
-    return redirect('hood')
+    return redirect('neigbourhood')
 
 @login_required(login_url='login')
 def create_neighborhood(request):
@@ -125,12 +125,12 @@ def create_neighborhood(request):
             data.save()
             return redirect('hoods')
     ctx = {'form': form}
-    return render(request, 'hoodapp/create-hood.html', ctx)
+    return render(request, 'mainapp/create.html', ctx)
 
 def user_profile(request):
     profile = Profile.objects.get(owner = request.user)
     ctx = {'profile': profile}
-    return render(request, 'hoodapp/profile.html', ctx)
+    return render(request, 'mainapp/profile.html', ctx)
 
 def update_profile(request):
     profile = Profile.objects.get(owner = request.user)
@@ -142,4 +142,4 @@ def update_profile(request):
             return redirect('profile')
 
     ctx = {'profile': profile, 'form':form}
-    return render(request, 'hoodapp/update-profile.html', ctx)
+    return render(request, 'mainapp/updateprofile.html', ctx)

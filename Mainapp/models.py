@@ -38,7 +38,7 @@ class Business(models.Model):
     name = models.CharField(max_length=300, blank=True, null=True)
     location = models.TextField()
     contact = models.CharField(max_length=300, blank=True, null=True)
-    hood = models.ForeignKey(NeighbourHood, on_delete=models.SET_NULL, null=True, blank=True)
+    neighborhood = models.ForeignKey(NeighbourHood, on_delete=models.SET_NULL, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) :
