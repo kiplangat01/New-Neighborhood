@@ -5,36 +5,36 @@ from cloudinary.models import CloudinaryField
 class NeighbourHood(models.Model):
     name = models.CharField(max_length=200)
     location =  models.CharField(max_length=200)
-    img = CloudinaryField('image')
+    photo = CloudinaryField('image')
     admin = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
-# Create your models here.
+
 class Profile(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=300, blank=True, null=True)
-    pic = CloudinaryField('image', blank = True)
-    hood = models.ForeignKey(NeighbourHood, on_delete=models.SET_NULL, null=True, blank=True)
+    photo = CloudinaryField('image', blank = True)
+    neighborhood = models.ForeignKey(NeighbourHood, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return self.owner.username
+        return self.user.username
 
 
-class News(models.Model):
-    poster = models.ForeignKey(Profile, on_delete=models.CASCADE)
+class Updates(models.Model):
+    display = models.ForeignKey(Profile, on_delete=models.CASCADE)
     title = models.CharField(max_length=300, blank=True, null=True)
     body = models.TextField()
-    hood = models.ForeignKey(NeighbourHood, on_delete=models.SET_NULL, null=True, blank=True)
+    neighborhood = models.ForeignKey(NeighbourHood, on_delete=models.SET_NULL, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) :
         return self.title
 
 class Business(models.Model):
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     name = models.CharField(max_length=300, blank=True, null=True)
     location = models.TextField()
     contact = models.CharField(max_length=300, blank=True, null=True)
