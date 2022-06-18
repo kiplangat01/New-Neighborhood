@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import NeighbourHood, Profile, Updates
-from .forms import CreateNeigbourhoodForm, RegisterForm, ProfileUpdateForm
+from .forms import CreateNeighbourhoodForm, RegisterForm, ProfileUpdateForm
 from .email import welcome
 
 
@@ -53,28 +53,22 @@ def register_user(request):
             profile= Profile.objects.create(owner=user)
             profile.save()
 
-            return render(request, 'mainapp/success.html')
+            return render(request, 'mainapp/index.html')
     context = {'form': form}
-    return render(request, 'mainapp/auth.html', context)
+    return render(request, 'mainapp/users.html', context)
 
 def home(request):
     context = {}
     return render(request, 'mainapp/index.html', context)
 
-@login_required(login_url='login')
-def contact(request):
-    context = {}
-    return render(request, 'mainapp/contact.html', context)
 
-def about(request):
-    context = {}
-    return render(request, 'mainapp/about.html', context)
+
 
 @login_required(login_url='login')
 def neighborhoods(request):
-    neigbourhoods = NeighbourHood.objects.all()
+    neighbourhood = NeighbourHood.objects.all()
     member = Profile.objects.get(owner = request.user)
-    context = {'neigbourhoods': neigbourhoods, 'member': member}
+    context = {'neigbourhoods': neighbourhood, 'member': member}
     return render(request, 'mainapp/neigbourhood.html', context)
 
 def self_neigbourhood(request, name):
@@ -95,28 +89,28 @@ def self_neigbourhood(request, name):
 @login_required(login_url='login')
 def new_neighborhood(request, name):
     page = 'join'
-    neighborhood = get_object_or_404(NeighbourHood, name=name)
+    neighbourhood = get_object_or_404(NeighbourHood, name=name)
     if request.method == 'POST':
         user = Profile.objects.get(owner =request.user)
-        user.hood = neighborhood
+        user.neigbuhood = neighbourhood
         user.save()
         messages.success(request, 'You have successfully joined')
-        return redirect('hood', neighborhood.name)
-    context = {'page':page, 'obj': neighborhood}
+        return redirect('hood', neighbourhood.name)
+    context = {'page':page, 'obj': neighbourhood}
     return render(request, 'mainapp/new.html', context)
 
 @login_required(login_url='login')
 def leave_neighborhood(request, name):
-    neighborhood = get_object_or_404(NeighbourHood, id=id)
-    request.user.profile.hood = None
+    neighbourhood = get_object_or_404(NeighbourHood, id=id)
+    request.user.profile.nei = None
     request.user.profile.save()
-    return redirect('neigbourhood')
+    return redirect('neighbourhood')
 
 @login_required(login_url='login')
-def create_neighborhood(request):
-    form  = CreateNeigbourhoodForm()
+def create_neighbourhood(request):
+    form  = CreateNeighbourhoodForm()
     if request.method == "POST": 
-        form = CreateNeigbourhoodForm(request.POST, request.FILES)
+        form = CreateNeighbourhoodForm(request.POST, request.FILES)
         if form.is_valid():
             name = form.cleaned_data['name']
             location = form.cleaned_data['location']
