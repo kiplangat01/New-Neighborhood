@@ -39,7 +39,7 @@ cloudinary.config (
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'mainapp'
+    'Mainapp',
     'crispy_forms',
     'bootstrap4',
     'django.contrib.auth',
