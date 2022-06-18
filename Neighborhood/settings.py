@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary, cloudinary.api,cloudinary.uploader
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +27,12 @@ SECRET_KEY = 'django-insecure-89jqu99hoobgvlu5%0f@vl8rr(wrhrt+781&-(da!12ui6u$af
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+cloudinary.config ( 
+  cloud_name = 'nobies',
+  api_key = '119444351949172', 
+  api_secret = 'TNDcDVOVJspzts-EnDYcNt0zHos'
+)
 
 
 # Application definition
@@ -124,3 +131,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend' 
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'meshnobie@gmail.com'
+EMAIL_HOST_PASSWORD = 'kzgovjuizlyxwvil'
+# Configure Django App for Heroku.
+# django_heroku.settings(locals())
