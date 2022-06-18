@@ -1,0 +1,93 @@
+{%extends 'main/base.html'%}
+{%load static%}
+
+{%block content%}
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+               
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="page-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="header-text">
+                    <h2>{{profile.user.username}}</h2>
+                    <div class="div-dec"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="top-section mb-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-image">
+                    {%if profile.pic%}
+                    <img src="{{profile.photo.url}}" class="rounded-5 w-50">
+                    
+                    {%endif%}
+                </div>
+            </div>
+            {%if updates%}
+            <section class=" col-lg-6" id="services">
+                <div class="">
+                    <div class="service-item">
+                        <h5>My Updates</h5>
+                        <hr>
+                       {%for updates in uodates%}
+                       <div class="mb-3">
+                        <h6>{{updates.title}}</h6>
+                        <p>{{updates.body}}</p>
+                        <small class="text-muted">{{updates.created | timesince}}</small>
+                       </div>
+                       {%endfor%}
+                    </div>
+                </div>
+            </section>
+            {%endif%}
+
+            <section class=" col-lg-6 mt-3" id="services">
+                <div class="">
+                    <div class="service-item">
+                        <h5>Name ~ {{profile.user.username}}</h5>
+                        <hr>
+                        {%if profile.bio%}
+                        <p>Bio : {{profile.bio}}</p>
+                        {%else%}
+                        <p></p>
+                        {%endif%}
+
+                        {%if profile.user.email%}
+                        <p>Email : {{profile.user.email}}</p>
+                        {%else%}
+                        <p>User has no email address</p>
+                        {%endif%}
+                        <div class="mt-4">
+                            {%if profile.neighbourhood is None %}
+                            <h6>You havent joined any nehood</h6>
+                            {%else%}
+                            <h6>Current Hood :
+                                <a style="color: #43ba7f;" href="{%url 'hood' profile.hood.name%}">
+                                    {{profile.hood.name}}
+                                </a>
+                            </h6>
+                            {%endif%}
+                        </div>
+                        <a href="{%url 'update-profile' %}">
+                            <i class="fa-solid fa-user-pen float-end" style="font-size: 20px; color: #ff511a;"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+</section>
+
+{% endblock %}
