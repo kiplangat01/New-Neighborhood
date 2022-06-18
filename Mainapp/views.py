@@ -28,8 +28,8 @@ def login_user(request):
             return redirect('home')
         else:
             messages.error(request, 'incorect username or password')
-    ctx = {'page': page}
-    return render(request, 'mainapp/auth.html', ctx)
+    context = {'page': page}
+    return render(request, 'mainapp/auth.html', context)
 
 def logout_user(request):
     logout(request)
@@ -54,21 +54,21 @@ def register_user(request):
             profile.save()
 
             return render(request, 'mainapp/success.html')
-    ctx = {'form': form}
-    return render(request, 'mainapp/auth.html', ctx)
+    context = {'form': form}
+    return render(request, 'mainapp/auth.html', context)
 
 def home(request):
-    ctx = {}
-    return render(request, 'mainapp/index.html', ctx)
+    context = {}
+    return render(request, 'mainapp/index.html', context)
 
 @login_required(login_url='login')
 def contact(request):
-    ctx = {}
-    return render(request, 'mainapp/contact.html', ctx)
+    context = {}
+    return render(request, 'mainapp/contact.html', context)
 
 def about(request):
-    ctx = {}
-    return render(request, 'mainapp/about.html', ctx)
+    context = {}
+    return render(request, 'mainapp/about.html', context)
 
 @login_required(login_url='login')
 def neighborhoods(request):
@@ -124,13 +124,13 @@ def create_neighborhood(request):
             data = NeighbourHood.objects.create(name=name, admin=request.user, location=location, img=img)
             data.save()
             return redirect('hoods')
-    ctx = {'form': form}
-    return render(request, 'mainapp/create.html', ctx)
+    context = {'form': form}
+    return render(request, 'mainapp/create.html', context)
 
 def user_profile(request):
     profile = Profile.objects.get(owner = request.user)
-    ctx = {'profile': profile}
-    return render(request, 'mainapp/profile.html', ctx)
+    context = {'profile': profile}
+    return render(request, 'mainapp/profile.html', context)
 
 def update_profile(request):
     profile = Profile.objects.get(owner = request.user)
@@ -141,5 +141,5 @@ def update_profile(request):
             form.save()
             return redirect('profile')
 
-    ctx = {'profile': profile, 'form':form}
-    return render(request, 'mainapp/updateprofile.html', ctx)
+    context = {'profile': profile, 'form':form}
+    return render(request, 'mainapp/updateprofile.html', context)
