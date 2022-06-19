@@ -1,7 +1,33 @@
-{% extends "main/base.html" %}\
+{% extends "main/base.html" %}
+
+
 
 {% block content %} 
 
-<h1>welcome to neigbourhood</h1>
+
+    <style>
+        .header{
+            background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7) ),url('https://thumbs.dreamstime.com/b/friendly-neighborhood-2348816.jpg');
+            background-size: cover; 
+            background-position: center;
+            position: relative;
+            min-height: 100vh;
+        }
+
+    </style>
+
+
+     <header class="header">
+        {% include "nav.html" %}
+        <div class="green-button">
+            <a href="{%url 'neigbourhood'%}">Get Neigbourhoods</a>
+            </div>
+     </header> 
+     
+
+                  
+                   
+   
+
 
 {% endblock content %}
