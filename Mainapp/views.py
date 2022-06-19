@@ -99,7 +99,7 @@ def new_neighborhood(request, name):
         messages.success(request, 'You have successfully joined')
         return redirect('hood', neighbourhood.name)
     context = {'page':page, 'obj': neighbourhood}
-    return render(request, 'main/new.html', context)
+    return render(request, 'main/uplod.html', context)
 
 @login_required(login_url='login')
 def leave_neighborhood(request, name):
