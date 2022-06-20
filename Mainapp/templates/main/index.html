@@ -7,24 +7,270 @@
 
     <style>
         .header{
-            background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7) ),url('https://images.unsplash.com/photo-1603298108410-e6f28ad2708d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmVpZ2hib3Job29kfGVufDB8fDB8fA%3D%3D&w=1000&q=80');
+            background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7) ),url('https://www.cityoftaylor.com/ImageRepository/Document?documentID=1627');
             background-size: cover; 
             background-position: center;
             position: relative;
             min-height: 100vh;
         }
 
+        .text-box{
+            width: 90%;
+            position: absolute;
+            top: 30%;
+            
+            transform: translate(-50, -50);
+            margin-left: 20px;
+        }
+        .text-box h1{
+            font-size: 70px;
+            margin-left: 100px;
+            font-weight: bold;
+        }
+        .text-box p{
+            margin: 10px 0 40px;
+            font-size: 20px;
+            margin-top: 50px;
+            margin-left: 100px;
+            color: rgb(255, 255, 255);
+            
+        }
+        
+        .neibourhood{
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            padding: 100px;
+
+
+        }
+
+        .sevices{
+            flex-basis: 31%;
+            background: #fff3f3;
+            border-radius: 10px;
+            margin-bottom: 5%;
+            padding: 20px 12px;
+            box-sizing: border-box;
+            transition: 0.5;
+        }
+        
+        #row{
+            margin-top: 5%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h3{
+            text-align: center;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        
+        .sevices:hover{
+            box-shadow: 0 0 40px 0px rgb(0,0,0,0.2);
+        }
+
+         .contact{
+             width: 80%;
+             margin: auto;
+             text-align: center;
+             padding-top: 20px;
+
+         }
+
+         .contact-col{
+             flex-basis: 32%;
+             border-radius: 10px;
+             margin-bottom: 30px;
+             position: relative;
+             padding-left: 20px;
+
+             overflow: hidden;
+         }
+        .display{
+            background: transparent;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            
+            top: 0;
+            left: 0;
+            transition: 0.5s;
+        }
+
+        .display:hover{
+            background: rgba(217, 111, 227, 0.7);
+            padding-left: 50px;
+        }
+
+
+        .display h3{
+            width: 100%;
+            font-weight: 500;
+            font-size: 30px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            position: absolute;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .display:hover h3{
+            bottom: 50%;
+            opacity: 1;
+        }
+
+
+
+        /* media queries */
+         
+        @media(max-width: 700px){
+            .text-box h1{
+                font-size: 40px;
+            }
+            .text-box p{
+                font-size: 12px;
+            }
+            #row{
+                flex-direction: column;
+            }
+            .cre{
+                font-size: 12px;
+                height: 10px;
+                margin-top: -20px;
+            }
+        }
+
+        @media(max-width: 1024px){
+            .text-box h1{
+                font-size: 40px;
+            }
+            .text-box p{
+                font-size: 12px;
+            }
+            #row{
+                flex-direction: column;
+            }
+            .cre{
+                font-size: 5px;
+                height: 10px;
+                margin-top: 20px;
+            }
+        }
+
+
+
     </style>
 
 
+        
+        
+       
+
+      
      <header class="header">
          {% include "nav.html" %}
-        <div class="green-button">
-            <a href="{%url 'neighbourhood'%} " class="btn btn-outline-info">Get Neigbourhoods</a>
-            </div>
-     </header> 
+         <div class="text-box" style="color: white;">
+            <h1> describe and understand  <br> your <span style="color: brown;">community</span></h1>
+            <hr>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br> alias culpa officia, earum, accusamus itaque distinctio nihil nulla, <br> aut exercitationem beatae sunt.</p>
+             <hr style="color: wheat;">
+            <div class="green-button">
+                <a href="{%url 'neighbourhood'%} " style="font-size:20px; margin-left: 100px; background-color: rgb(237, 109, 5); padding: 10px; color: rgb(255, 254, 254); border-radius: 5px;" class="cre">Join Neigbourhoods</a>
+                <a href="{%url 'create'%}"   style="font-size:20px; margin-left: 100px; background-color: brown; padding: 10px; color: rgb(162, 162, 162); border-radius: 5px;" class="cre">create neibourhood</a>
+                </div>
+        </div> 
+       
      
 
+     
+     </header> 
+
+     <section class="container-fluid neibourhood">
+        <h1 class="font-weight-bold">
+            Best ideas for <span style="color: brown;">businesses</span>
+        </h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis totam excepturi possimus adipisci perspiciatis mollitia.</p>
+        <div id="row" class="row">
+            <div class="sevices">
+                <h3>
+                    Pizza Shop
+                </h3>
+               <p>There are over 75,000 pizza joints <br>
+                 in this Neigbourhoods. <br> If you open a great one, <br>
+                 you’ll likely get a very warm reception <br>
+                  despite having to compete with the <br>
+                 likes of Domino’s and Pizza Hut
+                   </p>
+
+            </div>
+            <div class="sevices">
+                <h3>
+                    Independent Coffee Shop
+                </h3>
+               <p>Community branding,  tourism <br> and downtown development <br>
+                firm Roger Brooks International <br> developed a community-planning <br> 
+                guide that outlines what the <br> firm calls “ingredients of <br> an outstanding downtown.”
+
+                   </p>
+
+            </div>
+            <div class="sevices">
+                <h3>
+                    Bookstore
+                </h3>
+               <p>
+                Bookstores are a hub for creativity <br> and a safe place for inquisitive kids. <br>
+                They often hold events that <br> generate critical mass like <br> book signings, author readings, <br>
+                book clubs and contests for budding authors.
+                  
+               </p>
+
+            </div>
+        </div>
+     </section>
+          <!-- contact -->
+     <section class="contact">
+
+          <h1 >
+              contact
+          </h1>
+          <p>contact different service providers for health, updates and security</p>
+          <div class="row">
+          <div class="contact-col">
+              <img src="https://wallpaperaccess.com/full/4499620.jpg" alt="" width="500px" height="400px" style="display: block;">
+              <div class="display">
+                  <h3 class="text-danger">
+                      <a href="#">Security</a>
+                  </h3>
+              </div>
+          </div>
+          <div class="contact-col">
+            <img src="https://content.gallup.com/origin/gallupinc/GallupSpaces/Production/Cms/WORKPLACEV9CMS/2bgqjhmw_0iifqf_p8twtq.jpg" alt="" width="500px" height="400px" style="display: block;">
+            <div class="display">
+                <h3 class="text-danger">
+                   <a href="#"> Healcare</a>
+                </h3>
+            </div>
+        </div>
+        <div class="contact-col">
+            <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWRtaW58ZW58MHx8MHx8&w=1000&q=80" alt="" width="500px" height="400px" style="display: block;">
+            <div class="display">
+                <h3 class="text-danger">
+                    <a href="#">Admin</a>
+                </h3>
+            </div>
+        </div>
+        </div>
+     </section>
+
+
+     <section >
+
+     </section>
                   
                    
    

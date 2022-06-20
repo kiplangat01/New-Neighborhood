@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import messages
-from .models import NeighbourHood, Profile, Updates
+from .models import Business, NeighbourHood, Profile, Updates
 from .forms import CreateNeighbourhoodForm, RegisterForm, ProfileUpdateForm
 from .email import welcome
 
@@ -54,8 +54,9 @@ def register_user(request):
 
             profile= Profile.objects.create(user=user)
             profile.save()
-
-            return render(request, 'main/index.html')
+            
+            page = 'register'
+            return render(request, 'main/index.html' ,{'page': page})
     context = {'form': form}
     return render(request, 'main/user.html', context)
 
@@ -74,19 +75,16 @@ def neighborhoods(request):
     return render(request, 'main/neigbourhood.html', context)
 
 def self_neigbourhood(request, name):
-    newnmember = NeighbourHood.objects.get(name = name)
-    updates = Updates.objects.filter(neighborhood = newnmember)
-    current_user = Profile.objects.get(user = request.user)
-
-    if request.method == 'POST':
-        display = Profile.objects.get(user = request.user)
-        title = request.POST.get('title')
+    neighbourhood = NeighbourHood.objects.get(name=name)
+    updates = Updates.objects.filter(neighbourhood=neighbourhood)
+    business = Business.objects.filter(neighbourhood=neighbourhood)
+    current_user = Profile.objects.get(user=request.user)
+    
+    if request.method == "POST":
         body = request.POST.get('body')
-        new_updates = Updates.objects.create(title = title, body =body, display = display, newnmember =newnmember)
-        new_updates.save()
 
-    context = {'newnmember': newnmember, 'current_user': current_user, 'updates':updates}
-    return render(request, 'main/self.html', context)
+    ctx = {'neighbourhood': neighbourhood, 'current_user': current_user, 'updates': updates, 'business': business}
+    return render(request, 'main/self.html', ctx)
 
 @login_required(login_url='login')
 def view_neighbourhood(request, name):
@@ -129,7 +127,7 @@ def create_neighbourhood(request):
             img = form.cleaned_data['img']
             data = NeighbourHood.objects.create(name=name, admin=request.user, location=location, img=img)
             data.save()
-            return redirect('hoods')
+            return redirect('neighbourhood')
     context = {'form': form}
     return render(request, 'main/create.html', context)
 
@@ -149,3 +147,32 @@ def update_profile(request):
 
     context = {'profile': profile, 'form':form}
     return render(request, 'main/updateprofile.html', context)
+
+def add_updates(request, name):
+    page = 'updates'
+    neighbourhood = NeighbourHood.objects.get(name=name)
+    if request.method == 'POST':
+        displayer = Profile.objects.get(user=request.user)
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        new_updates = Updates.objects.create(
+           displayer=displayer, title=title, body=body,  neighbourhood=neighbourhood)
+        new_updates.save()
+        context = {'neighbourhood': neighbourhood}
+        return redirect('connect', neighbourhood.name)
+    context = {'page':page}
+    return render(request, 'main/post.html', context)
+
+def add_business(request, name):
+    page = 'business'
+    neighbourhood = NeighbourHood.objects.get(name=name)
+    if request.method == 'POST':
+        user = Profile.objects.get(user=request.user) 
+        business_name = request.POST.get('name')
+        location = request.POST.get('location')
+        contact = request.POST.get(' contact')
+        new_business = Business.objects.create(user=user, name=business_name, location=location,  contact= contact, neighbourhood=neighbourhood)
+        new_business.save()
+        return redirect('connect', neighbourhood.name)
+    context = {'page':page}
+    return render(request, 'main/post.html', context)

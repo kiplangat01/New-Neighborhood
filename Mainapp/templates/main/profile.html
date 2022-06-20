@@ -33,7 +33,7 @@
             <div class="col-lg-6">
                 <div class="left-image">
                     
-                    <img src="{{profile.photo.url}}" class="rounded-5 w-50">
+                    <img src="{{profile.photo.url}}" class="rounded-circle w-50" style="height: 250px;">
                     
                     
                 </div>
@@ -76,8 +76,8 @@
                             {%if profile.neighbourhood is None %}
                             <h6>Hey {{profile.user.username}} there are so many neibourhood waiting for you</h6>
                             {%else%}
-                            <h6>Current Hood :
-                                <a style="color: #4374ba;" href="{%url 'neighbourhood' profile.neighbourhood.name%}">
+                            <h6>Current Neighbourhood :
+                               
                                     {{profile.neighbourhood.name}}
                                 </a>
                             </h6>

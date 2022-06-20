@@ -24,7 +24,7 @@ class Profile(models.Model):
 
 
 class Updates(models.Model):
-    display = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    displayer = models.ForeignKey(Profile, on_delete=models.CASCADE)
     title = models.CharField(max_length=300, blank=True, null=True)
     body = models.TextField()
     neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.SET_NULL, null=True, blank=True)

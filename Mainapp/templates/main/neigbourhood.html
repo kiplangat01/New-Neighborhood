@@ -1,8 +1,10 @@
 {%extends 'main/base.html'%}
 {%load static%}
-{%include 'nav.html' %}
+
 {%block content%}
+{%include 'nav.html' %}
 <header class="header-area header-sticky">
+  
   <div class="container">
       <div class="row">
           <div class="col-12">               
@@ -34,7 +36,7 @@
       <a class='col-lg-6' href="{%url 'neigbourhood' neigbourhood.name%}">
         <div class="">
           <div class="service-item">
-            <i class="fas fa-map-marker-alt"></i>
+            <i class="fas fa-map-marker-alt" >join</i>
             <h4>{{neigbourhood.name}}</h4>
             <p> Location: {{neigbourhood.location}}</p>
             <i class="fas fa-user-check float-end"></i>

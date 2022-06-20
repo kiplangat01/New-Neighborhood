@@ -15,8 +15,10 @@ urlpatterns = [
     path('neighbourhood/', views.neighborhoods, name='neighbourhood'),
     path('view/<str:name>', views.view_neighbourhood, name='view'),
     path('join/<str:name>', views.join_neighbourhood, name='join'),
-    path('hoods/<str:name>', views.self_neigbourhood, name='hood'),
+    path('connect/<str:name>', views.self_neigbourhood, name='connect'),
     path('create/', views.create_neighbourhood, name='create'),
+    path('updates/<str:name>', views.add_updates, name='updates'),
+    path('add_business/<str:name>', views.add_business, name='business'),
     # password recovery
     path('password-reset/', 
     auth_views.PasswordResetView.as_view(template_name='main/password_reset.html'), 

@@ -1,14 +1,10 @@
-{% extends "main/base.html" %}
-
-
-{% block content %} 
-
+{%extends 'main/base.html'%}
+{%block content%}
 <header class="header-area header-sticky">
-  {%include 'nav.html' %}
     <div class="container">
         <div class="row">
             <div class="col-12">
-           
+                {%include 'nav.html' %}
             </div>
         </div>
     </div>
@@ -19,7 +15,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="header-text">
-                    <h2>Post News</h2>
+                    <h2>Create a Hood</h2>
                     <div class="div-dec"></div>
                 </div>
             </div>
@@ -32,32 +28,17 @@
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
           <div class="section-heading">
-            <h6>Post News</h6>
+            <h6>Create a neibourhood</h6>
           </div>
         </div>
         <div class="col-lg-10 offset-lg-1">
           <form id="contact" action="" method="POST" class="mb-3" enctype="multipart/form-data">
             {%csrf_token%}
-            <div class="row">
-              <div class="">
-                  <fieldset>
-                      <input type="text" name="title" id="name"
-                          placeholder="News title..." required>
-                  </fieldset>
-              </div>
-              <div class="">
-                  <fieldset>
-                      <textarea type="text" name="body" id="body"
-                          placeholder="News content.." required></textarea>
-                  </fieldset>
-              </div>
-            </div>
-            <button type="submit" id="form-submit">Submit</button>
+            {{form}}
+                <button type="submit" id="form-submit" class="orange-button">Submit</button>
           </form>
         </div>
       </div>
     </div>
-</section>
-
-
-{% endblock %}
+  </section>
+{%endblock%}

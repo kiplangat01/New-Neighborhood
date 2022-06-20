@@ -1,1 +1,79 @@
+{%extends 'main/base.html'%}
+{%load static%}
+
+
 {% include "nav.html" %}
+
+{% block content %}
+
+<div class="page-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="header-text">
+                    <h2>{{neighbourhood.name}} Neigbourhood</h2>
+                    <div class="div-dec"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="left-image">
+    <img src="{{hood.img.url}}" alt="">
+</div>
+
+<article class="accordion">
+    <div class="accordion-head">
+        <span>News</span>
+        <span class="icon">
+            <i class="icon fa fa-chevron-right"></i>
+        </span>
+
+        <button type="button" class="btn btn-sm float-end">
+            <a style='color: #43ba7f;' href="{%url 'updates' hood.name%}">Post News</a>
+        </button>
+    </div>
+    <div class="accordion-body">
+        <div class="content">
+            {%for news in news %}
+            <p class="mb-3">
+            <h6>{{news.title}}</h6>
+            <br> {{news.body}} <br>
+            <br>
+            <br><small class="text-muted">posted {{news.created | timesince}} ago</small>
+            </p>
+            {%endfor%}
+        </div>
+    </div>
+</article>
+
+<article class="accordion">
+    <div class="accordion-head">
+        <span>Businesses</span>
+        <span class="icon">
+            <i class="icon fa fa-chevron-right"></i>
+        </span>
+
+        <button type="button" class="btn btn-sm float-end">
+            <a style='color: #43ba7f;' href="{%url 'business' hood.name%}">Post Business</a>
+        </button>
+    </div>
+    <div class="accordion-body">
+        <div class="content">
+            {%for business in business %}
+            <p class="mb-3">
+            <h6>{{business.name | capfirst}}</h6>
+            <br> {{business.owner | capfirst}}
+            <br> {{business.location | capfirst}}
+            <br> {{business.contact}}
+            <br> <small class="text-muted">active since {{business.created | timesince}}</small>
+            </p>
+            {%endfor%}
+        </div>
+    </div>
+</article>
+
+
+{% endblock %}

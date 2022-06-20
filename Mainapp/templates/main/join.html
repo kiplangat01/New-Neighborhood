@@ -1,11 +1,12 @@
 {% extends "main/base.html" %}
-{%include 'nav.html' %}
+
 
 
 {% block content %}
 
 
 <div class="">
+    {%include 'nav.html' %}
     <div class="service-item">
       <i class="fas fa-map-marker-alt"></i>
       <h4>{{neighbourhood.name}}</h4>
@@ -16,20 +17,20 @@
 </a>
 
 {%if page == 'join' %}
-<section class="contact-us-form  mb-5">
+<section class="contact-us-form  mb-5 container">
     <div class="container mb-5">
         <div class="row mb-5">
-            <div class="col-lg-6 offset-lg-3">
+            <div class="">
                 <div class="section-heading">
-                    <h4>Join {{obj}} Hood? </h4>
+                    <h4>Join {{obj}} Neigbourhood? </h4>
                 </div>
             </div>
             <div class="col-lg-10">
-                <form class='mb-5'id="" action="" method="POST">
+                <form style="align-items: center;" class='mb-5 text-center'id="" action="" method="POST">
                     {%csrf_token%}
                     <div class="row text-center pt-5">
-                        <a href="{{request.META.HTTP_REFERER}}" class="btn fs-4 col-md-6"  style="color: #ff511a;">Go Back</a>
-                        <input type="submit" class="btn col-md-6 fs-4" value="Confirm" style="color: #43ba7f;">     
+                        <a href="{{request.META.HTTP_REFERER}}" class="btn btn-outline-info text-center"  style="color: #ff1a76; margin-right: 10px;">find different</a>
+                        <input type="submit" class="btn btn-outline-info text-center" value="Confirm" style="color: #4376ba; margin-left: 20px;">     
                     </div>
                 </form>
             </div>
@@ -37,9 +38,27 @@
     </div>
 </section>
 {%else%}
-<p>Leave Hood</p>
+<p>Leave Neigbourhood</p>
 {%endif%}
-
+<section class="top-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-image">
+                    <img src="{{hood.img.url}}" alt="">
+                </div>
+                <section class="services" id="services">
+                    <div class="">
+                        <div class="service-item">
+                            <h5>Hood admin: {{hood.admin.username}}</h5>
+                            <p>Location ~ {{hood.location}}</p>
+                            {%if hood.admin.email%}
+                            <p class="float-end"><a  style="color: #ff511a;" 
+                                href="mailto:{{hood.admin.email}}">Contact Admin</a></p>
+                            {%endif%}
+                        </div>
+                    </div>
+                </section>
 
 
 {% endblock %}

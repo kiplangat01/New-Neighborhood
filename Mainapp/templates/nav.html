@@ -1,4 +1,7 @@
 
+<style>
+  
+</style>
 
 <nav class="navbar navbar-expand-lg bg-transparent">
   <a class="navbar-brand text-light font-weight-bold" style="font-family: 'Merienda'; font-size: 40px;" href="{% url 'home' %}">neigbourhood</a>
@@ -17,6 +20,7 @@
         <a class="nav-link text-light" href="{% url 'profile' %}">Profile</a>
         <a class="nav-link text-light" href="{% url 'logout' %}">logout</a>
         <a class="nav-link text-light" href="{%url 'neighbourhood'%}">neighbourhood</a>
+        <a class="nav-link text-light" href="{%url 'create'%}">create</a>
 
         {% else %}
       <li class="nav-item">
