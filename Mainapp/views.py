@@ -89,17 +89,26 @@ def self_neigbourhood(request, name):
     return render(request, 'main/self.html', context)
 
 @login_required(login_url='login')
-def new_neighborhood(request, name):
+def view_neighbourhood(request, name):
+    page = 'view'
+    neighbourhood = get_object_or_404(NeighbourHood, name=name)
+    context = {'page':page, 'neighbourhood': neighbourhood}
+    return render(request, 'main/join.html', context)
+
+
+@login_required(login_url='login')
+def join_neighbourhood(request, name):
     page = 'join'
     neighbourhood = get_object_or_404(NeighbourHood, name=name)
     if request.method == 'POST':
-        user = Profile.objects.get(user =request.user)
-        user.neigbuhood = neighbourhood
+        user = Profile.objects.get(user=request.user)
+        user.neighbourhood = neighbourhood
         user.save()
         messages.success(request, 'You have successfully joined')
-        return redirect('hood', neighbourhood.name)
-    context = {'page':page, 'obj': neighbourhood}
-    return render(request, 'main/uplod.html', context)
+        return redirect('neighbourhood')
+    ctx = {'page': page, 'neighbourhood': neighbourhood}
+    return render(request, 'main/join.html', ctx)
+
 
 @login_required(login_url='login')
 def leave_neighborhood(request, name):
@@ -110,6 +119,7 @@ def leave_neighborhood(request, name):
 
 @login_required(login_url='login')
 def create_neighbourhood(request):
+    page = 'create'
     form  = CreateNeighbourhoodForm()
     if request.method == "POST": 
         form = CreateNeighbourhoodForm(request.POST, request.FILES)
@@ -121,12 +131,12 @@ def create_neighbourhood(request):
             data.save()
             return redirect('hoods')
     context = {'form': form}
-    return render(request, 'mainapp/create.html', context)
+    return render(request, 'main/create.html', context)
 
 def user_profile(request):
     profile = Profile.objects.get(user = request.user)
     context = {'profile': profile}
-    return render(request, 'mainapp/profile.html', context)
+    return render(request, 'main/profile.html', context)
 
 def update_profile(request):
     profile = Profile.objects.get(user = request.user)

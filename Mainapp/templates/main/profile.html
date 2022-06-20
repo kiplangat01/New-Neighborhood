@@ -13,6 +13,7 @@
 </header>
 
 <div class="page-heading">
+    {% include "nav.html" %}
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -27,13 +28,14 @@
 
 <section class="top-section mb-3">
     <div class="container">
+        
         <div class="row">
             <div class="col-lg-6">
                 <div class="left-image">
-                    {%if profile.pic%}
+                    
                     <img src="{{profile.photo.url}}" class="rounded-5 w-50">
                     
-                    {%endif%}
+                    
                 </div>
             </div>
             {%if updates%}
@@ -57,32 +59,32 @@
             <section class=" col-lg-6 mt-3" id="services">
                 <div class="">
                     <div class="service-item">
-                        <h5>Name ~ {{profile.user.username}}</h5>
+                        <h5>Name : {{profile.user.username}}</h5>
                         <hr>
                         {%if profile.bio%}
                         <p>Bio : {{profile.bio}}</p>
                         {%else%}
-                        <p></p>
+                        <p> bio comming soon</p>
                         {%endif%}
 
                         {%if profile.user.email%}
                         <p>Email : {{profile.user.email}}</p>
                         {%else%}
-                        <p>User has no email address</p>
+                        <p>Hey {{profile.user.username}} update you email adress</p>
                         {%endif%}
                         <div class="mt-4">
                             {%if profile.neighbourhood is None %}
-                            <h6>You havent joined any nehood</h6>
+                            <h6>Hey {{profile.user.username}} there are so many neibourhood waiting for you</h6>
                             {%else%}
                             <h6>Current Hood :
-                                <a style="color: #43ba7f;" href="{%url 'hood' profile.hood.name%}">
-                                    {{profile.hood.name}}
+                                <a style="color: #4374ba;" href="{%url 'neighbourhood' profile.neighbourhood.name%}">
+                                    {{profile.neighbourhood.name}}
                                 </a>
                             </h6>
                             {%endif%}
                         </div>
-                        <a href="{%url 'update-profile' %}">
-                            <i class="fa-solid fa-user-pen float-end" style="font-size: 20px; color: #ff511a;"></i>
+                        <a href="{%url 'update-profile' %}" class="btn btn-outline-info">
+                            update profile
                         </a>
                     </div>
                 </div>
@@ -90,4 +92,4 @@
         </div>
 </section>
 
-{% endblock %}
+{%endblock%}

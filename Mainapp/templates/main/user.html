@@ -3,6 +3,16 @@
 {% include "nav.html" %}
 {% block content %}
 
+<style>
+  section{
+      
+      background-size: cover; 
+      background-position: center;
+      position: relative;
+      min-height: 100vh;
+  }
+
+</style>
 
 <!-- Login -->
 {%if page == 'login' %}
@@ -12,7 +22,7 @@
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
           <div class="section-heading">
-            <h4>Login</h4>
+            <h4 class="te">Login</h4>
           </div>
         </div>
         <div class="col-lg-10 offset-lg-1">
@@ -45,23 +55,28 @@
 </section>
 {%else%}
 <section class="contact-us-form  mb-5">
+  {% include "nav.html" %}
+
     <div class="container">
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
           <div class="section-heading">
-            <h4>Register</h4>
+            <h4 class="text-light">Register</h4>
           </div>
         </div>
         <div class="col-lg-10 offset-lg-1">
+          
           <form id="contact" action="" method="post">
             {%csrf_token%}
+            
                 {{form}}
                 <div class="row">
+                  
                     <fieldset class="col-md-6">
-                        <button type="submit" id="form-submit" class="orange-button">Submit</button>
-                    </fieldset>
+                        <button type="submit" id="form-submit" class="orange-button text-center">Submit</button> <br>
+                    </fieldset> <br>
                     <div class="col-md-6">
-                        <p>Already have an account? <a class='signup-link' href="{%url 'login'%}">Login? </a></p>
+                        <p class="text-light">Already have an account? <a class='signup-link' href="{%url 'login'%}">Login? </a></p>
                     </div>
                 </div>
                 

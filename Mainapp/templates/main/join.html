@@ -1,0 +1,45 @@
+{% extends "main/base.html" %}
+{%include 'nav.html' %}
+
+
+{% block content %}
+
+
+<div class="">
+    <div class="service-item">
+      <i class="fas fa-map-marker-alt"></i>
+      <h4>{{neighbourhood.name}}</h4>
+      <p> Location ~ {{neighbourhood.location}}</p>
+      <a href="{% url 'join' neighbourhood.name %}" class="btn btn-outline-info">join</a>
+    </div>
+  </div>
+</a>
+
+{%if page == 'join' %}
+<section class="contact-us-form  mb-5">
+    <div class="container mb-5">
+        <div class="row mb-5">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="section-heading">
+                    <h4>Join {{obj}} Hood? </h4>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <form class='mb-5'id="" action="" method="POST">
+                    {%csrf_token%}
+                    <div class="row text-center pt-5">
+                        <a href="{{request.META.HTTP_REFERER}}" class="btn fs-4 col-md-6"  style="color: #ff511a;">Go Back</a>
+                        <input type="submit" class="btn col-md-6 fs-4" value="Confirm" style="color: #43ba7f;">     
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{%else%}
+<p>Leave Hood</p>
+{%endif%}
+
+
+
+{% endblock %}

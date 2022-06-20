@@ -16,7 +16,7 @@
       {%if request.user.is_authenticated%}
         <a class="nav-link text-light" href="{% url 'profile' %}">Profile</a>
         <a class="nav-link text-light" href="{% url 'logout' %}">logout</a>
-        <a class="nav-link text-light" href="{%url 'neigbourhood'%}">neigbourhood</a>
+        <a class="nav-link text-light" href="{%url 'neighbourhood'%}">neighbourhood</a>
 
         {% else %}
       <li class="nav-item">
