@@ -1,34 +1,82 @@
 {%extends 'main/base.html'%}
 {%block content%}
+
+
+<style>
+  form{
+
+border-radius: 20px;
+width: fit-content;
+padding: 50px;
+margin-left: 250px;
+margin-top: 30px;
+background-color: white;
+box-shadow: 5px 5px 25px 25px gray;
+}
+
+fieldset input{
+height: 40px;
+padding: auto;
+width: 400px;
+border: 1px solid gray;
+padding-left: 20px;
+border-radius: 10px;
+}
+
+.section-heading{
+  text-align: center;
+  color: brown;
+}
+
+.container{
+  margin-top: 30px;
+}
+
+
+#form-submit{
+    background-image: linear-gradient(to right, rgb(0, 55, 255) , rgb(46, 148, 211));
+    padding: 8px;
+    padding-left: 20px;
+    padding-right: 30px;
+    border: 0;
+    text-align: center;
+    border-radius: 15px;
+  }
+
+@media(max-width: 800px){
+fieldset input{
+width: 200px;
+}
+form{
+width: 300px;
+margin-left: 30px;
+}
+#contact{
+padding: 10px;
+margin-left: 20px;
+}
+}
+</style>
+
+
 <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                {%include 'nav.html' %}
+                
             </div>
         </div>
     </div>
 </header>
 
-<div class="page-heading">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="header-text">
-                    <h2>Create a Hood</h2>
-                    <div class="div-dec"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <section class="contact-us-form">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
           <div class="section-heading">
-            <h6>Create a neibourhood</h6>
+            <h3>Create a neibourhood</h3>
           </div>
         </div>
         <div class="col-lg-10 offset-lg-1">

@@ -4,9 +4,33 @@
 
 {% block content %}
 
+<style>
+    .service-item{
+    box-sizing: border-box;
+    padding: 50px;
+    margin: 20px;
+    width: fit-content;
+    margin-left: 100px;
+    
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: 0.5;
+  }
+  #section{
+      float: right;
+      margin-top: -250px;
+  }
+  
+
+  .sevices-item:hover{
+    box-shadow: 0 0 40px 0px rgb(0,0,0,0.2);
+        }
+</style>
+
 
 <div class="">
-    {%include 'nav.html' %}
+    
     <div class="service-item">
       <i class="fas fa-map-marker-alt"></i>
       <h4>{{neighbourhood.name}}</h4>
@@ -17,7 +41,7 @@
 </a>
 
 {%if page == 'join' %}
-<section class="contact-us-form  mb-5 container">
+<section id="section" class="contact-us-form  mb-5 container">
     <div class="container mb-5">
         <div class="row mb-5">
             <div class="">
@@ -26,7 +50,7 @@
                 </div>
             </div>
             <div class="col-lg-10">
-                <form style="align-items: center;" class='mb-5 text-center'id="" action="" method="POST">
+                <form  class='mb-5'id="" action="" method="POST">
                     {%csrf_token%}
                     <div class="row text-center pt-5">
                         <a href="{{request.META.HTTP_REFERER}}" class="btn btn-outline-info text-center"  style="color: #ff1a76; margin-right: 10px;">find different</a>
@@ -45,17 +69,14 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="left-image">
-                    <img src="{{hood.img.url}}" alt="">
+                    <img src="{{neigbourhood.img.url}}" alt="">
                 </div>
                 <section class="services" id="services">
                     <div class="">
                         <div class="service-item">
                             <h5>Hood admin: {{hood.admin.username}}</h5>
                             <p>Location ~ {{hood.location}}</p>
-                            {%if hood.admin.email%}
-                            <p class="float-end"><a  style="color: #ff511a;" 
-                                href="mailto:{{hood.admin.email}}">Contact Admin</a></p>
-                            {%endif%}
+                            
                         </div>
                     </div>
                 </section>

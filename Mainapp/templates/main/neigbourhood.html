@@ -2,7 +2,38 @@
 {%load static%}
 
 {%block content%}
-{%include 'nav.html' %}
+
+
+<style>
+  .page-heading{
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7) ),url('/Mainapp/static/images/animebg.jpg');
+    background-size: cover; 
+    text-align: center;
+    background-position: center;
+    color: azure;
+    position: relative;
+    min-height: 40vh;
+  }
+  .page-heading h2{
+    margin-top: 50px;
+  }
+    
+  .service-item{
+    box-sizing: border-box;
+    padding: 30px;
+    margin: 20px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: 0.5;
+  }
+
+  .sevices-item:hover{
+    box-shadow: 0 0 40px 0px rgb(0,0,0,0.2);
+        }
+</style>
+
+
 <header class="header-area header-sticky">
   
   <div class="container">
@@ -20,6 +51,7 @@
     <div class="col-lg-12">
       <div class="header-text">
         <h2>Our Neigbourhoods</h2>
+        
         <div class="div-dec"></div>
       </div>
     </div>
@@ -49,7 +81,7 @@
       
         <div class="">
           <div class="service-item">
-            <i class="fas fa-map-marker-alt"></i>
+            <i class="fas fa-map-marker-alt text-primary" style="font-size: 40px;"></i>
             <h4>{{neigbourhood.name}}</h4>
             <p> Location ~ {{neigbourhood.location}}</p>
             <a href="{% url 'view' neigbourhood.name  %}" class="btn btn-outline-info">view neibourhood</a>

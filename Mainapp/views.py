@@ -103,16 +103,18 @@ def join_neighbourhood(request, name):
         user.neighbourhood = neighbourhood
         user.save()
         messages.success(request, 'You have successfully joined')
-        return redirect('neighbourhood')
+        return redirect('selected', neighbourhood.name)
     ctx = {'page': page, 'neighbourhood': neighbourhood}
     return render(request, 'main/join.html', ctx)
 
 
 @login_required(login_url='login')
-def leave_neighborhood(request, name):
-    neighbourhood = get_object_or_404(NeighbourHood, id=id)
-    request.user.profile.nei = None
-    request.user.profile.save()
+def leave_neighbourhood(request, name):
+    profile = Profile.objects.get(user = request.user)
+    neighborhood = get_object_or_404(NeighbourHood, name=name)
+    profile.hood = None
+    profile.save()
+    messages.success(request, 'successfully left the neigbourhood')
     return redirect('neighbourhood')
 
 @login_required(login_url='login')
@@ -159,7 +161,7 @@ def add_updates(request, name):
            displayer=displayer, title=title, body=body,  neighbourhood=neighbourhood)
         new_updates.save()
         context = {'neighbourhood': neighbourhood}
-        return redirect('connect', neighbourhood.name)
+        return redirect('selected', neighbourhood.name)
     context = {'page':page}
     return render(request, 'main/post.html', context)
 
